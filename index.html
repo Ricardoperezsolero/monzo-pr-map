@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ricardo Perez-Solero · PR Expansion Map for Monzo</title>
   <meta name="description" content="An interactive map of PR and communications work across European markets, built for Monzo's PR Manager, Expansion Markets role.">
-  <link rel="icon" type="image/png" href="logo-personal.png">
+  <link rel="icon" type="image/png" href="Monzo%20favicon.png">
   <link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet">
   <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
   <style>
@@ -340,6 +340,23 @@ const CAMPAIGNS = [
     metrics: [
       { num: '1M+', desc: 'YouTube views' }
     ]
+  },
+  {
+    id: 'colonies',
+    coords: [2.3522, 48.8566],
+    label: 'France',
+    flag: '🇫🇷',
+    market: 'France · Paris',
+    client: 'Colonies · Waka Coliving',
+    period: '2025',
+    challenge: 'Colonies, a French coliving operator, was launching its first-ever property in Spain — Waka, a 79-room building in Madrid\'s Tetuán district — with zero brand recognition in a brand-new market and no existing press or influencer relationships to build on.',
+    action: 'Ran the full press office for the Spanish launch: press release, press calls and save-the-date outreach across national real-estate press and hyperlocal Tetuán media. Paired it with an influencer partnership and a co-branded launch event, working with Tom Hopcroft (@Guirisdemierda, "Guiris de Mierda") to reach the property\'s target renter audience directly.',
+    result: '8 media placements (Idealista, El Español, EjePrime, Economía Digital, BrainsRe, elDiario.es and Tetuán 30 días) for €578K in estimated ad value and 35.7M in reach. The influencer campaign added 28,452 views and 880 sticker taps, and the co-branded launch event drew around 100 attendees.',
+    metrics: [
+      { num: '€578K', desc: 'estimated advertising value' },
+      { num: '35.7M', desc: 'media reach (OTS)' },
+      { num: '100', desc: 'launch event attendees' }
+    ]
   }
 ];
 
@@ -363,8 +380,8 @@ function fitToCampaigns() {
   const isMobile = window.innerWidth < 680;
   map.fitBounds(bounds, {
     padding: isMobile
-      ? { top: 90, bottom: 40, left: 40, right: 40 }
-      : { top: 40, bottom: 40, left: 40, right: 380 },
+      ? { top: 90, bottom: 90, left: 40, right: 40 }
+      : { top: 40, bottom: 100, left: 90, right: 380 },
     duration: 0
   });
 }
@@ -433,8 +450,9 @@ document.getElementById('card-close-btn').addEventListener('click', closeCard);
 map.on('click', closeCard);
 
 // ── Pins ──
-map.on('load', () => {
-  CAMPAIGNS.forEach(campaign => {
+// Markers only need the Map instance, not full tile load, so add them
+// immediately rather than gating on 'load' (which waits on every visible tile).
+CAMPAIGNS.forEach(campaign => {
     const el = document.createElement('div');
     el.className = 'pin-wrap';
     el.innerHTML = `<div class="pin-dot"></div><div class="pin-label">${campaign.label}</div>`;
@@ -449,7 +467,6 @@ map.on('load', () => {
     new maplibregl.Marker({ element: el, anchor: 'center' })
       .setLngLat(campaign.coords)
       .addTo(map);
-  });
 });
 </script>
 </body>
