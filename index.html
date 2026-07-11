@@ -72,7 +72,7 @@
 
     /* ── Pins ── */
     .pin-wrap {
-      position: relative; cursor: pointer; width: 14px; height: 14px;
+      position: absolute; top: 0; left: 0; cursor: pointer; width: 14px; height: 14px;
     }
     .pin-dot {
       width: 14px; height: 14px; border-radius: 50%;
@@ -94,7 +94,8 @@
       text-transform: uppercase;
       padding: 3px 8px; border-radius: 4px; white-space: nowrap;
       backdrop-filter: blur(4px);
-      pointer-events: none;
+      pointer-events: auto;
+      cursor: pointer;
       border: 1px solid rgba(255,255,255,0.08);
     }
 
@@ -296,7 +297,6 @@ const CAMPAIGNS = [
       { client: 'EcoLab', text: 'Strategic content for Ogilvy: op-eds and in-depth features placed in Spain\'s tier-one media.' },
       { client: 'Minsait', text: 'Translated the launch of Minsait\'s Phygital division into a press-ready narrative for tech and business media.' },
       { client: 'Accumin', text: 'Led content and copy strategy for Tinsa Group\'s rebrand into Accumin.' },
-      { client: 'Baynana', text: 'Digital growth consultant for a Spanish-Arabic migration outlet founded by Syrian refugees — secured the GNI Startups Lab and Meta Accelerator grants, and grew organic follower conversion 22% through audience-targeted content and A/B testing.' },
       { client: 'Zespri', text: 'Strategy and content consultancy for global campaign releases, adapting messaging for local market rollout.' }
     ]
   },
